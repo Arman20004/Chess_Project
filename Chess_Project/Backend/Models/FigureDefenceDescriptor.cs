@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Backend.Models
+{
+    internal class FigureDefenceDescriptor
+    {
+        private readonly int _defenceRank;
+        public FigureDefenceDescriptor(int rank) 
+        { 
+            _defenceRank = rank;  
+        }
+        public int DefenceRank => _defenceRank;
+
+        public bool IsDefended => _defenceRank > 0;
+    }
+}
