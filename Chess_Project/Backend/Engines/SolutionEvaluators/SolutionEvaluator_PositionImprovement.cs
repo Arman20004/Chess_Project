@@ -32,10 +32,16 @@ namespace Backend.Engines.SolutionEvaluators
                 if (options == null || !options.Any()) continue;
                 
                 foreach (var move in options)
-                {
+                {                  
+
                     simulator.ApplyMove(new FigureMoveDescriptor(simulator, move));
-                    move.SetMoveRank(new MoveRankDescriptor(_category, Evaluate_FiguresHitFieldsCount(simulator)));
-                    moves.Add(move);
+
+                    if (!IsComputerFigureAtHit(move.MoveToLocation, simulator))
+                    {
+                        move.SetMoveRank(new MoveRankDescriptor(_category, Evaluate_FiguresHitFieldsCount(simulator)));
+                        moves.Add(move);
+                    }
+
                     simulator.RevertLastMove(move.SourceFigure);
                 }
             }
@@ -65,12 +71,13 @@ namespace Backend.Engines.SolutionEvaluators
 
         private int GetNormalizedHitFieldsWeight(int optionsCount, Figure figure)
         {
-            
+            return optionsCount;
+            /*
             if (figure.Category == FigureCategory.Pawn || figure.Category == FigureCategory.King)
                 return optionsCount;
 
             return (int) (optionsCount * 100 / (decimal)Math.Abs(figure.Weight));
-
+            */
 
         }
     }

@@ -24,7 +24,7 @@ namespace Backend.Engines.SolutionEvaluators
 
             foreach (var figure in GetComputerFigures(disposition).OrderByDescending(x => Math.Abs(x.Weight)))
             {
-                if (!IsComputerFigureAtHit(figure, disposition)) continue;
+                if (!IsComputerFigureAtHit(figure.CurrentLocation, disposition)) continue;
 
                 var options = figure.GetPossibleMoves(disposition)
                           .Where(x => x.TerminationReason == MovementTerminationReason.None);
@@ -34,7 +34,7 @@ namespace Backend.Engines.SolutionEvaluators
                 foreach (var move in options)
                 {
                     simulator.ApplyMove(new FigureMoveDescriptor(simulator, move));
-                    if (!IsComputerFigureAtHit(figure, simulator))
+                    if (!IsComputerFigureAtHit(figure.CurrentLocation, simulator))
                     {
                         // we can safe the figure
                         move.SetMoveRank(new MoveRankDescriptor(_category, Math.Abs(figure.Weight)));
@@ -52,20 +52,7 @@ namespace Backend.Engines.SolutionEvaluators
         }
 
         
-        private bool IsComputerFigureAtHit(Figure figure, IDispositionProvider disposition)
-        {
-            foreach (var fgr in disposition.ActiveFigures.Where(x => !x.IsComputerFigure))
-            {
-             
-                FigureMoveOption hitFigureOpt = fgr.GetPossibleMoves(disposition)
-                                         .FirstOrDefault(x => x.TerminationReason == MovementTerminationReason.ReachedOpponentsFigure
-                                                        && x.MoveToLocation.Equals(figure.CurrentLocation));
-
-                if (hitFigureOpt != null) return true;
-            }
-
-            return false;
-        }
+      
 
         private int Evaluate_FiguresHitFieldsCount(IDispositionProvider disposition)
         {

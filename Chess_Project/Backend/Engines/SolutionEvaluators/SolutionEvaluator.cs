@@ -22,5 +22,20 @@ namespace Backend.Engines.SolutionEvaluators
         {
             return disposition.ActiveFigures.Where(x => x.IsComputerFigure);
         }
+
+        protected bool IsComputerFigureAtHit(FigureLocation figureLocation, IDispositionProvider disposition)
+        {
+            foreach (var fgr in disposition.ActiveFigures.Where(x => !x.IsComputerFigure))
+            {
+
+                FigureMoveOption hitFigureOpt = fgr.GetPossibleMoves(disposition)
+                                         .FirstOrDefault(x => x.TerminationReason == MovementTerminationReason.ReachedOpponentsFigure
+                                                        && x.MoveToLocation.Equals(figureLocation));
+
+                if (hitFigureOpt != null) return true;
+            }
+
+            return false;
+        }
     }
 }

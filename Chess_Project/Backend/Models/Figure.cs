@@ -1,6 +1,7 @@
 ﻿using Backend.Engines;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,28 +35,45 @@ namespace Backend.Models
         public bool IsComputerFigure => _weight < 0;
 
 
-        protected IEnumerable<FigureMoveOption> GetPossibleMovesBase(IDispositionProvider disposition, Func<IEnumerable<FigureLocation>> navigatorFunc)
+        protected IEnumerable<FigureMoveOption> GetPossibleMovesBase(IDispositionProvider disposition, 
+                                Func<IEnumerable<FigureLocation>> navigatorFunc,
+                                Func<FigureMoveOption, bool> customAcceptanceChecker = null,
+                                bool terminateOnReachingOtherFigure=true)
         {
             Figure otherFigure = null;
-
+            FigureMoveOption moveOption = null;
             foreach (var move in navigatorFunc())
             {
                 otherFigure = disposition.GetFigureAtLocation(move);
-                if (otherFigure == null)
-                {
-                    yield return new FigureMoveOption(this, move, MovementTerminationReason.None);
+                moveOption = CreateFigureMoveOption(move, otherFigure);
+                
+                if (customAcceptanceChecker == null ||
+                       customAcceptanceChecker(moveOption))
+                {                   
+                    yield return moveOption;
                 }
-                else
-                {
-                    yield return new FigureMoveOption(this, move,
-                        otherFigure.IsComputerFigure == this.IsComputerFigure ? MovementTerminationReason.ReachedSelfFigure
-                        : MovementTerminationReason.ReachedOpponentsFigure);
 
+                if (terminateOnReachingOtherFigure && otherFigure != null )
+                {
                     yield break;
                 }
             }
         }
 
+        protected FigureMoveOption CreateFigureMoveOption(FigureLocation move, Figure otherFigure)
+        {            
+                        
+            if (otherFigure == null)
+            {
+                return new FigureMoveOption(this, move, MovementTerminationReason.None);
+            }
+                  
+            return new FigureMoveOption(this, move,
+                otherFigure.IsComputerFigure == this.IsComputerFigure ? MovementTerminationReason.ReachedSelfFigure
+                : MovementTerminationReason.ReachedOpponentsFigure);
+
+                
+        }
         public object Clone()
         {
             Figure otherFigure = (Figure)this.MemberwiseClone();

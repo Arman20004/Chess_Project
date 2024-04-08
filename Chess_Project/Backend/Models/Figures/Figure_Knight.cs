@@ -19,7 +19,8 @@ namespace Backend.Models.Figures
         public override IEnumerable<FigureMoveOption> GetPossibleMoves(IDispositionProvider disposition)
         {
             foreach (var ent in GetPossibleMovesBase(disposition,
-                  () => MoveSimulationHelpers.GetMoves_Knight(this.CurrentLocation)))
+                  () => MoveSimulationHelpers.GetMoves_Knight(this.CurrentLocation),
+                  null, false))
             {
                 yield return ent;
             }

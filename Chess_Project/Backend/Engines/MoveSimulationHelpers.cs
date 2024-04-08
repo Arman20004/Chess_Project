@@ -59,7 +59,7 @@ namespace Backend.Engines
         public static IEnumerable<FigureLocation> GetMoves_Diagonal(FigureLocation fromCurrentLocation, MoveDirectionHorizontal directionHoriz, MoveDirectionVertical directionVert)
         {
             int stepHoriz = directionHoriz == MoveDirectionHorizontal.Right ? 1 : -1;
-            int stepVert = directionVert == MoveDirectionVertical.Up ? 1 : -1;
+            int stepVert = directionVert == MoveDirectionVertical.Up ? -1 : 1;
 
             if (State.GameSetup.BoardFlipped)
             {

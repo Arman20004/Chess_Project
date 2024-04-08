@@ -23,14 +23,17 @@ namespace Backend.Models.Figures
         {
             bool isPawnAtOriginalLocation = _originalLocation.Equals(this.CurrentLocation);
 
-            foreach (var ent in GetPawnPossibleMoves(disposition,
-               () => MoveSimulationHelpers.GetMoves_Pawn(disposition, this.IsComputerFigure, this.CurrentLocation, isPawnAtOriginalLocation)))
+            foreach (var ent in GetPossibleMovesBase(disposition,
+               () => MoveSimulationHelpers.GetMoves_Pawn(disposition, this.IsComputerFigure, this.CurrentLocation, isPawnAtOriginalLocation),
+               IsValidPawnMove,
+               false
+               ))
             {
                 yield return ent;
             }
         }
 
-
+        /*
         private IEnumerable<FigureMoveOption> GetPawnPossibleMoves(IDispositionProvider disposition, Func<IEnumerable<FigureLocation>> navigatorFunc)
         {
             Figure otherFigure = null;
@@ -55,7 +58,7 @@ namespace Backend.Models.Figures
                 }
             }
         }
-
+        */
         //to filter out straight eat
         private bool IsValidPawnMove(FigureMoveOption moveOpt)
         {

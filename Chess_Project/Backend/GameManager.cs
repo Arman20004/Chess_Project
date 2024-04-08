@@ -2,6 +2,7 @@
 using Backend.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -28,7 +29,11 @@ namespace Backend
         public FigureMoveDescriptor DoComputerMove()
         {
             var computerMove = _optimalMoveEngine.GetOptimalMove(_disposition);
-            if (computerMove == null) throw new Exception("Could not do any move");
+            if (computerMove == null)
+            {
+                Trace.WriteLine("Could not do any move");
+                return null;
+            }
 
             FigureMoveDescriptor move = new FigureMoveDescriptor(_disposition, computerMove);
 
