@@ -1,10 +1,5 @@
 ﻿using Backend.Engines;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Models.Figures
 {
@@ -16,12 +11,12 @@ namespace Backend.Models.Figures
 
         }
 
-       
+
         public override IEnumerable<FigureMoveOption> GetPossibleMoves(IDispositionProvider disposition)
         {
-            
-            foreach (var ent in GetPossibleMovesBase(disposition, 
-                    ()=> MoveSimulationHelpers.GetMoves_Diagonal(this.CurrentLocation, MoveDirectionHorizontal.Left, MoveDirectionVertical.Up)))
+
+            foreach (var ent in GetPossibleMovesBase(disposition,
+                    () => MoveSimulationHelpers.GetMoves_Diagonal(this.CurrentLocation, MoveDirectionHorizontal.Left, MoveDirectionVertical.Up)))
             {
                 yield return ent;
             }

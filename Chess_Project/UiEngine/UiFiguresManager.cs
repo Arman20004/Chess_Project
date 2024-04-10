@@ -1,19 +1,10 @@
-﻿using Backend;
-using Backend.Models;
-using Backend.State;
+﻿using Backend.State;
 using Chess_Project.UiModel;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Figure = Backend.Models.Figure;
 
@@ -31,19 +22,19 @@ namespace Chess_Project.UiEngine
             Grid chessBoardGrid, Canvas movementOwnerGrid,
             Action<Image> imageEventHandlersAssigner)
         {
-            _displayCoordinateMapper = displayCoordinateMapper; 
+            _displayCoordinateMapper = displayCoordinateMapper;
             _chessBoardGrid = chessBoardGrid;
             _movementOwnerGrid = movementOwnerGrid;
-            _imageEventHandlersAssigner = imageEventHandlersAssigner;  
+            _imageEventHandlersAssigner = imageEventHandlersAssigner;
 
-            _figures= new List<UiFigure>(); 
+            _figures = new List<UiFigure>();
         }
 
         public void InitializeFigures(IEnumerable<Figure> figures)
         {
-            if(figures == null || !figures.Any()) return;   
+            if (figures == null || !figures.Any()) return;
 
-            foreach(var fig in figures)
+            foreach (var fig in figures)
             {
                 UiFigure uiFig = CreateUiFigure(fig);
                 _figures.Add(uiFig);
@@ -60,16 +51,27 @@ namespace Chess_Project.UiEngine
             Canvas.SetLeft(figure.SourceImage, point.X);
             Canvas.SetTop(figure.SourceImage, point.Y);
             //figure.SourceImage.Margin = new Thickness(point.X, point.Y, 0, 0);
-          //  Trace.WriteLine($"( {point.X}, {point.Y} ) ");
+            //  Trace.WriteLine($"( {point.X}, {point.Y} ) ");
         }
 
+        public void RedrawAllFigures()
+        {
+
+            foreach (var uiFigure in _figures)
+            {
+                uiFigure.SourceImage.Width = _displayCoordinateMapper.CellWidth;
+                uiFigure.SourceImage.Height = _displayCoordinateMapper.CellHeigth;
+                uiFigure.SourceImage.UpdateLayout();
+
+            }
+        }
         public void InvalidateFigure(Figure figure)
         {
-            
+
             UiFigure uiFig = ResolveUiFigure(figure);
             if (uiFig == null) return;
 
-             InvalidateFigure(uiFig);
+            InvalidateFigure(uiFig);
 
         }
 
@@ -85,13 +87,9 @@ namespace Chess_Project.UiEngine
             _chessBoardGrid.Children.Remove(figure.SourceImage);
             figure.SourceImage.Width = _displayCoordinateMapper.CellWidth;
             figure.SourceImage.Height = _displayCoordinateMapper.CellHeigth;
-            /*
-            Point point = _displayCoordinateMapper.GetUpperLeftCornerPointOfBoardSquare(figure.SourceFigure.CurrentLocation);
-            figure.SourceImage.ClipToBounds = true;
-            figure.SourceImage.Margin = new Thickness(point.X, point.Y, 0,0);
-            */
+
             _movementOwnerGrid.Children.Add(figure.SourceImage);
-                      
+
         }
 
         public void EndFigureMove(UiFigure figure)
@@ -99,11 +97,12 @@ namespace Chess_Project.UiEngine
             _movementOwnerGrid.Children.Remove(figure.SourceImage);
             Grid.SetColumn(figure.SourceImage, figure.SourceFigure.CurrentLocation.HorizontalPosition);
             Grid.SetRow(figure.SourceImage, figure.SourceFigure.CurrentLocation.VerticalPosition);
+
             _chessBoardGrid.Children.Add(figure.SourceImage);
-            
+
         }
 
-      
+
         public void DeleteFigure(UiFigure uiFigure)
         {
             _figures.Remove(uiFigure);
@@ -113,7 +112,7 @@ namespace Chess_Project.UiEngine
         public void DeleteFigure(Figure figure)
         {
             UiFigure uiFig = ResolveUiFigure(figure);
-            if(uiFig != null)
+            if (uiFig != null)
             {
                 DeleteFigure(uiFig);
             }
@@ -123,9 +122,9 @@ namespace Chess_Project.UiEngine
         {
             Image imgControl = CreateFigureImage(figure);
             UiFigure uiFigure = new UiFigure(figure, imgControl);
-            imgControl.Tag  = uiFigure; 
+            imgControl.Tag = uiFigure;
             return uiFigure;
-            
+
         }
         private Image CreateFigureImage(Figure figure)
         {
@@ -161,7 +160,7 @@ namespace Chess_Project.UiEngine
             // e.g.  White_Bishop.png
         }
 
-       
+
 
     }
 }

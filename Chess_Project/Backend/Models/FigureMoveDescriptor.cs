@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Models
 {
@@ -13,7 +9,7 @@ namespace Backend.Models
 
         private readonly FigureLocation _moveToLocation;
 
-        public FigureMoveDescriptor(IDispositionProvider disposition,FigureMoveOption move)
+        public FigureMoveDescriptor(IDispositionProvider disposition, FigureMoveOption move)
         {
             _sourceFigure = move.SourceFigure;
             _moveToLocation = move.MoveToLocation;
@@ -39,18 +35,18 @@ namespace Backend.Models
             _opponentFigure = opponentFigure;
 
         }
- 
+
         public FigureLocation MoveToLocation => _moveToLocation;
         public Figure SourceFigure => _sourceFigure;
-        
+
         public Figure OpponentFigure => _opponentFigure;
 
         public object Clone()
         {
             if (_opponentFigure == null)
             {
-                return new FigureMoveDescriptor((Figure)this.SourceFigure.Clone(), 
-                                   (FigureLocation)this.MoveToLocation.Clone()  );
+                return new FigureMoveDescriptor((Figure)this.SourceFigure.Clone(),
+                                   (FigureLocation)this.MoveToLocation.Clone());
             }
             else
             {

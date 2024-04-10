@@ -3,15 +3,13 @@ using Backend.Models.Solution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Engines.SolutionEvaluators
 {
-    internal  class SolutionEvaluator_MaterialLossAvoidance : SolutionEvaluator
+    internal class SolutionEvaluator_MaterialLossAvoidance : SolutionEvaluator
     {
         public SolutionEvaluator_MaterialLossAvoidance()
-            :base(SolutionCategory.MaterialLossAvoidance)
+            : base(SolutionCategory.MaterialLossAvoidance)
         {
 
         }
@@ -40,19 +38,19 @@ namespace Backend.Engines.SolutionEvaluators
                         move.SetMoveRank(new MoveRankDescriptor(_category, Math.Abs(figure.Weight)));
                         return move;
                     }
-                                        
+
                     simulator.RevertLastMove(move.SourceFigure);
                 }
             }
 
-            
+
 
             return null;
 
         }
 
-        
-      
+
+
 
         private int Evaluate_FiguresHitFieldsCount(IDispositionProvider disposition)
         {

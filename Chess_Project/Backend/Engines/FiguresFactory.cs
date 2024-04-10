@@ -2,10 +2,6 @@
 using Backend.Models.Figures;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Engines
 {
@@ -23,7 +19,7 @@ namespace Backend.Engines
         };
         public static Figure CreateFigure(FigureCategory category, bool isComputerFigure, int horizontalPosition, int verticalPosition)
         {
-            Func < bool, FigureLocation, Figure > crtFunc = _figureCreators[category];
+            Func<bool, FigureLocation, Figure> crtFunc = _figureCreators[category];
             return crtFunc(isComputerFigure, new FigureLocation(horizontalPosition, verticalPosition));
         }
     }

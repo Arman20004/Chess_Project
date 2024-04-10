@@ -1,13 +1,5 @@
 ﻿using Backend.Models;
 using Backend.State;
-using Chess_Project.UiModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Chess_Project.UiEngine
@@ -19,14 +11,14 @@ namespace Chess_Project.UiEngine
 
         public DisplayCoordinateMapper(int initialWidth, int initialHeight)
         {
-            _currentWidth= initialWidth;    
-            _currentHeight= initialHeight;  
+            _currentWidth = initialWidth;
+            _currentHeight = initialHeight;
         }
 
         public void ReSize(int newWidth, int newHeight)
         {
-            _currentWidth= newWidth;
-            _currentHeight= newHeight;
+            _currentWidth = newWidth;
+            _currentHeight = newHeight;
         }
 
         public int CellWidth => _currentWidth / GameSetup.BoardSize;
@@ -39,8 +31,11 @@ namespace Chess_Project.UiEngine
             if (point.Y < 0 || point.Y > _currentHeight)
                 return null;
 
-            int horizCellIndex = (int)( point.X / CellWidth);
+            int horizCellIndex = (int)(point.X / CellWidth);
             int vertCellIndex = (int)(point.Y / CellHeigth);
+
+            if (horizCellIndex >= GameSetup.BoardSize) horizCellIndex = GameSetup.BoardSize - 1;
+            if (vertCellIndex >= GameSetup.BoardSize) vertCellIndex = GameSetup.BoardSize - 1;
 
             return new FigureLocation(horizCellIndex, vertCellIndex);
         }

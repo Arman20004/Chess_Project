@@ -1,11 +1,4 @@
-﻿using Backend.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Backend.State
+﻿namespace Backend.State
 {
     internal static class GameSetup
     {
@@ -16,7 +9,7 @@ namespace Backend.State
         public const bool BoardFlipped = false;
 
         public const int BoardSize = 8;
-              
-        
+
+
     }
 }

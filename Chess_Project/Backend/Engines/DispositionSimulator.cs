@@ -1,9 +1,5 @@
 ﻿using Backend.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Engines
 {
@@ -14,10 +10,10 @@ namespace Backend.Engines
 
         private FigureMoveDescriptor _previousMove;
         private Figure _previousFigure;
-        
+
         public DispositionSimulator(IDispositionProvider originalDisposition)
         {
-            _figures = new List<Figure>( originalDisposition.ActiveFigures);
+            _figures = new List<Figure>(originalDisposition.ActiveFigures);
 
             foreach (var figure in _figures)
             {
@@ -30,7 +26,7 @@ namespace Backend.Engines
         {
             _previousMove = (FigureMoveDescriptor)move.Clone();
 
-            if(move.OpponentFigure != null)
+            if (move.OpponentFigure != null)
             {
                 _previousFigure = this.GetFigureAtLocation(move.OpponentFigure.CurrentLocation);
             }
@@ -41,9 +37,9 @@ namespace Backend.Engines
             move.SourceFigure.SetCurrentLocation(move.MoveToLocation);
             if (move.OpponentFigure != null)
             {
-                _figures.Remove(move.OpponentFigure);    
+                _figures.Remove(move.OpponentFigure);
             }
-            
+
         }
 
         private void SetFigureAtLocation(Figure figure, FigureLocation location)
@@ -89,7 +85,7 @@ namespace Backend.Engines
             }
 
             _previousMove = null;
-            
+
         }
     }
 }

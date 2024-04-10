@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Backend.Models.Solution
+﻿namespace Backend.Models.Solution
 {
     internal class MoveRankDescriptor
     {
@@ -15,12 +9,12 @@ namespace Backend.Models.Solution
         public MoveRankDescriptor(SolutionCategory category, int rank)
         {
             Category = category;
-            Rank = rank;    
+            Rank = rank;
         }
 
         public override string ToString()
         {
-            if(Category >= SolutionCategory.MaterialImprovement)
+            if (Category >= SolutionCategory.MaterialImprovement)
             {
                 return $"{Category}: Rank={Rank}";
             }
@@ -28,7 +22,7 @@ namespace Backend.Models.Solution
             {
                 return $"{Category}";
             }
-            
+
         }
     }
 }

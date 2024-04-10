@@ -1,16 +1,11 @@
 ﻿using Backend.Engines;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Models.Figures
 {
     internal class Figure_Knight : Figure
     {
-        public Figure_Knight(bool isComputerFigure, FigureLocation initialLocation) 
+        public Figure_Knight(bool isComputerFigure, FigureLocation initialLocation)
             : base(FigureCategory.Knight, isComputerFigure, baseWeight: 30, initialLocation)
         {
 
@@ -24,7 +19,7 @@ namespace Backend.Models.Figures
             {
                 yield return ent;
             }
-                                
+
         }
     }
 }

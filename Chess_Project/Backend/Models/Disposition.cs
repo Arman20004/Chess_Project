@@ -1,17 +1,11 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Collections.Generic;
 
 namespace Backend.Models
 {
     internal class Disposition : IDispositionProvider
     {
         private readonly List<Figure> _figures = new List<Figure>();
-        private readonly Figure[,] _figuresPlacement = new Figure[8,8];
+        private readonly Figure[,] _figuresPlacement = new Figure[8, 8];
 
         public Disposition(IEnumerable<Figure> figuresWithInitialPlacements)
         {
@@ -22,7 +16,7 @@ namespace Backend.Models
                 SetFigureAtLocation(figure, figure.CurrentLocation);
             }
         }
-              
+
 
         public void ApplyMove(FigureMoveDescriptor move)
         {
@@ -43,11 +37,15 @@ namespace Backend.Models
 
         private void ResetFigureAtLocation(Figure figure, FigureLocation location)
         {
+
             _figuresPlacement[location.HorizontalPosition, location.VerticalPosition] = null;
         }
 
+
         public Figure GetFigureAtLocation(FigureLocation location)
         {
+
+
             return _figuresPlacement[location.HorizontalPosition, location.VerticalPosition];
         }
 

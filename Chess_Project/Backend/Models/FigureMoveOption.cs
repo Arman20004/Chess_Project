@@ -1,13 +1,9 @@
 ﻿using Backend.Models.Solution;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Models
 {
-    internal class FigureMoveOption : IComparable<FigureMoveOption> 
+    internal class FigureMoveOption : IComparable<FigureMoveOption>
     {
         private readonly Figure _sourceFigure;
 
@@ -26,8 +22,8 @@ namespace Backend.Models
 
         public FigureMoveOption(Figure sourceFigure, FigureLocation moveToLocation, MovementTerminationReason terminationReason,
             MoveRankDescriptor moveRank)
-            :this(sourceFigure, moveToLocation, terminationReason)
-        {            
+            : this(sourceFigure, moveToLocation, terminationReason)
+        {
             _moveRank = moveRank;
         }
 
@@ -35,7 +31,7 @@ namespace Backend.Models
         public MoveRankDescriptor MoveRank => _moveRank;
         public Figure SourceFigure => _sourceFigure;
 
-        public MovementTerminationReason TerminationReason=> _movementTerminationReason;
+        public MovementTerminationReason TerminationReason => _movementTerminationReason;
         public bool WasEvaluated => _moveRank != null;
 
         public int CompareTo(FigureMoveOption other)
@@ -49,7 +45,7 @@ namespace Backend.Models
             if (other.MoveRank == null)
                 return 1;
 
-            if(this.MoveRank.Category!= other.MoveRank.Category)
+            if (this.MoveRank.Category != other.MoveRank.Category)
                 return this.MoveRank.Category.CompareTo(other.MoveRank.Category);
 
             return this.MoveRank.Rank.CompareTo(other.MoveRank.Rank);
@@ -58,7 +54,7 @@ namespace Backend.Models
 
         public void SetMoveRank(MoveRankDescriptor moveRank)
         {
-            if (_moveRank!= null)
+            if (_moveRank != null)
                 throw new Exception("Move already was evaluated");
 
             _moveRank = moveRank;

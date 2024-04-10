@@ -1,9 +1,5 @@
 ﻿using Backend.State;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Models
 {
@@ -12,7 +8,7 @@ namespace Backend.Models
         public int HorizontalPosition { get; set; }
         public int VerticalPosition { get; set; }
 
-        
+
         public FigureLocation(int horizontalPosition, int verticalPosition)
         {
             VerticalPosition = verticalPosition;
@@ -23,8 +19,8 @@ namespace Backend.Models
         {
             get
             {
-                char letterName = (char)((int)'A' + HorizontalPosition );
-                return $"{letterName}{GameSetup.BoardSize- VerticalPosition}";
+                char letterName = (char)((int)'A' + HorizontalPosition);
+                return $"{letterName}{GameSetup.BoardSize - VerticalPosition}";
             }
         }
 
@@ -32,8 +28,8 @@ namespace Backend.Models
         {
             if (other == null) return false;
 
-            return this.HorizontalPosition == other.HorizontalPosition && 
-                this.VerticalPosition == other.VerticalPosition;    
+            return this.HorizontalPosition == other.HorizontalPosition &&
+                this.VerticalPosition == other.VerticalPosition;
         }
 
         public object Clone()

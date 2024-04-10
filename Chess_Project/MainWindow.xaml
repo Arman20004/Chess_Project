@@ -10,7 +10,7 @@
     <Grid Background="#FF0D0D0D" Name="MainGrid" >
 
         <!-- main board-->
-        <Image Name="ChessBoardIMG" Source="/Chess_assets/ChessBoardCut.jpeg" Stretch="Fill"/>
+        <Image Name="ChessBoardIMG" Source="/Chess_assets/ChessBoardCut.jpeg" Stretch="Fill" SizeChanged="ChessBoard_SizeChanged"/>
         <Grid x:Name="ChessBoardGrid" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

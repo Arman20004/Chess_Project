@@ -1,12 +1,5 @@
-﻿using Backend.Engines;
-using Backend.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Backend.Models;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace Chess_Project.UiModel
 {

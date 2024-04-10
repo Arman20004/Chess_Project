@@ -1,10 +1,5 @@
 ﻿using Backend.Engines;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Models.Figures
 {
@@ -17,7 +12,7 @@ namespace Backend.Models.Figures
             _originalLocation = initialLocation;
         }
 
-        
+
 
         public override IEnumerable<FigureMoveOption> GetPossibleMoves(IDispositionProvider disposition)
         {
@@ -67,9 +62,9 @@ namespace Backend.Models.Figures
 
             //pawn cannot eat straight
             return moveOpt.MoveToLocation.HorizontalPosition != this.CurrentLocation.HorizontalPosition;
-            
 
-            
+
+
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using Backend;
 using Backend.Models;
 using Chess_Project.UiModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Chess_Project.UiEngine
@@ -19,8 +14,8 @@ namespace Chess_Project.UiEngine
         private Point _clickPointOffset;
         public UserMoveTracker(DisplayCoordinateMapper coordinateMapper, GameManager gameManager)
         {
-            _coordinateMapper = coordinateMapper; 
-            _gameManager = gameManager; 
+            _coordinateMapper = coordinateMapper;
+            _gameManager = gameManager;
         }
 
         public UiFigure TrackingFigure => _trackingFigure;
@@ -31,14 +26,14 @@ namespace Chess_Project.UiEngine
         }
         public void StartTracking(UiFigure figure, Point initialClickPointOffset)
         {
-            _trackingFigure= figure;
+            _trackingFigure = figure;
             _clickPointOffset = new Point(initialClickPointOffset.X % _coordinateMapper.CellWidth,
-                                          initialClickPointOffset.Y % _coordinateMapper.CellHeigth);    
+                                          initialClickPointOffset.Y % _coordinateMapper.CellHeigth);
         }
 
         public void ResetTracking()
         {
-            _trackingFigure= null;
+            _trackingFigure = null;
         }
         public FigureMoveDescriptor EndTracking(Point point)
         {
@@ -52,10 +47,10 @@ namespace Chess_Project.UiEngine
             Figure figure = _gameManager.GetFigureAtLocaion(loc);
             if (figure != null && !figure.IsComputerFigure) { return null; }// user clicked self figure, not allowed
 
-                                  
-            return figure == null ?  new FigureMoveDescriptor(_trackingFigure.SourceFigure, loc)
+
+            return figure == null ? new FigureMoveDescriptor(_trackingFigure.SourceFigure, loc)
                                     : new FigureMoveDescriptor(_trackingFigure.SourceFigure, figure);
-                        
+
         }
 
 

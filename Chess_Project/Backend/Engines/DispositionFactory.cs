@@ -1,9 +1,5 @@
 ﻿using Backend.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Engines
 {
@@ -45,20 +41,20 @@ namespace Backend.Engines
                 FiguresFactory.CreateFigure(FigureCategory.King, true, 4, 0),
                 FiguresFactory.CreateFigure(FigureCategory.King, false, 4, 7),
 
-              
+
 
             });
 
-          
+
             for (int i = 0; i < State.GameSetup.BoardSize; i++)
             {
                 //Black Pawn positions
                 figures.Add(FiguresFactory.CreateFigure(FigureCategory.Pawn, !State.GameSetup.BoardFlipped, i, 1));
-                
+
                 //White Pawn positions
-                figures.Add(FiguresFactory.CreateFigure(FigureCategory.Pawn, State.GameSetup.BoardFlipped, i, 6)); 
+                figures.Add(FiguresFactory.CreateFigure(FigureCategory.Pawn, State.GameSetup.BoardFlipped, i, 6));
             }
-           
+
             return new Disposition(figures);
         }
     }

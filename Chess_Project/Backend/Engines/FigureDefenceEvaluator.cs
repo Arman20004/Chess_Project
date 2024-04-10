@@ -1,9 +1,6 @@
 ﻿using Backend.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Engines
 {
@@ -18,7 +15,7 @@ namespace Backend.Engines
 
         public void Reset()
         {
-            _dict.Clear();  
+            _dict.Clear();
         }
         public FigureDefenceDescriptor ResolveDefenceRank(Figure figure, IDispositionProvider currentDisposition)
         {

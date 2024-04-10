@@ -1,11 +1,6 @@
 ﻿using Backend.Models;
-using Backend.State;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Backend.Engines
 {
@@ -25,14 +20,14 @@ namespace Backend.Engines
            */
         };
 
-       
+
         public static IEnumerable<FigureLocation> GetMoves_Horizontal(FigureLocation fromCurrentLocation, MoveDirectionHorizontal direction)
         {
             int step = direction == MoveDirectionHorizontal.Right ? 1 : -1;
             int currentHorizPosition = fromCurrentLocation.HorizontalPosition + step;
-            
-            while(IsPositionWithinBoard(currentHorizPosition)) 
-            {                       
+
+            while (IsPositionWithinBoard(currentHorizPosition))
+            {
                 yield return new FigureLocation(currentHorizPosition, fromCurrentLocation.VerticalPosition);
                 currentHorizPosition += step;
             }
@@ -49,7 +44,7 @@ namespace Backend.Engines
 
             int currentVertPosition = fromCurrentLocation.VerticalPosition + step;
 
-            while (IsPositionWithinBoard( currentVertPosition ) )
+            while (IsPositionWithinBoard(currentVertPosition))
             {
                 yield return new FigureLocation(fromCurrentLocation.HorizontalPosition, currentVertPosition);
                 currentVertPosition += step;
@@ -69,11 +64,11 @@ namespace Backend.Engines
             int currentHorizPosition = fromCurrentLocation.HorizontalPosition + stepHoriz;
             int currentVertPosition = fromCurrentLocation.VerticalPosition + stepVert;
 
-            while (    IsPositionWithinBoard( currentHorizPosition, currentVertPosition) )
+            while (IsPositionWithinBoard(currentHorizPosition, currentVertPosition))
             {
                 yield return new FigureLocation(currentHorizPosition, currentVertPosition);
-                
-                currentHorizPosition+= stepHoriz;   
+
+                currentHorizPosition += stepHoriz;
                 currentVertPosition += stepVert;
             }
         }
@@ -82,12 +77,12 @@ namespace Backend.Engines
                bool isComputerFigure, FigureLocation fromCurrentLocation, bool isOriginalPosition)
         {
             // pawn always moves up (when not flipped)
-           // int step = State.GameSetup.BoardFlipped ? -1 : 1;
-            int step = isComputerFigure? 1 : -1;
+            // int step = State.GameSetup.BoardFlipped ? -1 : 1;
+            int step = isComputerFigure ? 1 : -1;
 
             // move one  square up
             int vertPosition = fromCurrentLocation.VerticalPosition + step;
-            if (!IsPositionWithinBoard( vertPosition))
+            if (!IsPositionWithinBoard(vertPosition))
                 yield break;
 
             yield return new FigureLocation(fromCurrentLocation.HorizontalPosition, vertPosition);
@@ -112,7 +107,7 @@ namespace Backend.Engines
                     }
                 }
             }
-            
+
 
             // when at original position, move two squares up 
             if (!isOriginalPosition)
@@ -126,7 +121,7 @@ namespace Backend.Engines
 
 
         }
-        
+
         public static IEnumerable<FigureLocation> GetMoves_Knight(FigureLocation fromCurrentLocation)
         {
             int horizPosition;
@@ -136,7 +131,7 @@ namespace Backend.Engines
                 horizPosition = fromCurrentLocation.HorizontalPosition + ent.Item1;
                 vertPosition = fromCurrentLocation.VerticalPosition + ent.Item2;
 
-                if(IsPositionWithinBoard(horizPosition, vertPosition))
+                if (IsPositionWithinBoard(horizPosition, vertPosition))
                     yield return new FigureLocation(horizPosition, vertPosition);
 
                 // same mirrored (array gives 4 offsets, other 4 are mirrored
@@ -166,7 +161,7 @@ namespace Backend.Engines
                 vertPosition = fromCurrentLocation.VerticalPosition + ent.Item2;
 
                 if (IsPositionWithinBoard(horizPosition, vertPosition))
-                    yield return new FigureLocation(horizPosition, vertPosition);                              
+                    yield return new FigureLocation(horizPosition, vertPosition);
 
             }
         }
