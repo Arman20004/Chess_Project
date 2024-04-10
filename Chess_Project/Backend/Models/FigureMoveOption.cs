@@ -62,7 +62,7 @@ namespace Backend.Models
 
         public override string ToString()
         {
-            return $"{_sourceFigure.Category}:{_sourceFigure.CurrentLocation.PositionName} -> {_moveToLocation.PositionName} /RSN: {_movementTerminationReason}/ /{_moveRank?.ToString()}/";
+            return $"{_sourceFigure.Category}:{_sourceFigure.CurrentLocation.PositionName} -> {_moveToLocation.PositionName} /{_moveRank?.ToString()}/";
         }
 
     }
